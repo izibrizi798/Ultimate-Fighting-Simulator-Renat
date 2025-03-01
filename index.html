@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@1,300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Doto:ROND@65&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/csshake-slow.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://fav.farm/🥓" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>U.F.S</title>
+</head>
+<body>
+    <div class="navbar">
+        <div class="INFO">© 2024 ZloyKirill, Inc. All Rights Reserved.</div>
+      </div>
+    <div class="fent">ULTIMATE FIGHTING SIMULATOR</div>
+    <div class="fent2">just enjoy it!</div>
+    <div class="wrapper">
+        <a href="../html/select.html">Start game</a>
+    </div>
+    <div class="wrapper2">
+        <a href="../html/tutorial.html"> Tutorial </a>
+    </div>
+    <div class="wrapper3">
+        <a href="../html/settings.html"> Settings </a>
+    </div>
+    <script>
+        var audioElement = new Audio();
+        audioElement.src = 'content/music/track1.mp3';
+        audioElement.volume = 0.25; // Для более мягкого звука
+        audioElement.preload = 'auto';
+        audioElement.play();
+        document.cookie = encodeURIComponent(String(1 + Number(document.cookie)))
+        let s = document.querySelector('.fent2')
+        let randomphrases = ['sweet home alabama','1488 PASHALKO VKLUCHAEM VENTILATORI','dungeon master','pilesos','rage','kirill','ohio','7 eleven','woter','burgir','pizza','sushi','lagman','rolli']
+        s.textContent = randomphrases[Math.floor(Math.random() * 16)]
+        s.textContent = s.textContent + " " + document.cookie
+    </script>
+</body>
+</html>
