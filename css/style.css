@@ -8,17 +8,17 @@ html {
   }
 
   .containerT {
-    padding: 20px;
+    padding: 1.3rem;
     background: #282a36;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 0.625rem;
+    box-shadow: 0.25rem 0.625rem rgba(0, 0, 0, 0.2);
 }
 .selectT, .buttonT {
-    margin-top: 10px;
-    padding: 10px;
-    font-size: 16px;
+    margin-top:  0.625rem;
+    padding:  0.625rem;
+    font-size: 1rem;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.3rem;
 }
 .buttonT {
     background-color: #ff6b6b;
@@ -29,8 +29,8 @@ html {
     background-color: #ff8787;
 }
 #ultimate-display {
-    margin-top: 20px;
-    font-size: 20px;
+    margin-top: 1.3rem;
+    font-size: 1.3rem;
 }
   
   body,html {
@@ -83,7 +83,7 @@ html {
   color: var(--key-text-color);
   cursor: pointer;
   height: 2em;
-  width: 120px;
+  width: 4rem;
   text-align: center;
   padding: 0.6em;
   margin: 0 0.6em;
@@ -109,7 +109,7 @@ html {
   color: var(--key-text-color);
   cursor: pointer;
   height: 2em;
-  width: 110px;
+  width: 3.6rem;
   text-align: center;
   padding: 0.6em;
   margin: 0 0.6em;
@@ -135,7 +135,7 @@ html {
   color: var(--key-text-color);
   cursor: pointer;
   height: 2em;
-  width: 120px;
+  width: 5%;
   text-align: center;
   padding: 0.6em;
   margin: 0 0.6em;
@@ -219,8 +219,16 @@ html {
   }
 
   .setting99 {
-    padding-top: 5%;
+    padding-top: 3%;
     font-size: 40px;
+    font-weight: 400;
+    text-align: center;
+    color: rgb(255, 127, 234);
+  }
+
+  .setting98 {
+    padding-top: 0%;
+    font-size: 10px;
     font-weight: 400;
     text-align: center;
     color: rgb(255, 127, 234);
