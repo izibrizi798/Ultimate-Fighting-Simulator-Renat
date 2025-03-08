@@ -33,6 +33,17 @@
     <button class="button2" id="febutton">[</button>
     <button class="button2" id="]button">]</button>
     <script>
+        let maxhpenemy1 = 100
+        let maxhpenemy2 = 100
+        let hpenemy1 = 100
+        let hpenemy2 = 100
+
+        let punch1 = 10
+        let punch2 = 10
+
+        let heal1 = -5
+        let heal2 = -5
+
         function getQueryParams() {
             const params = new URLSearchParams(window.location.search);
             return {
@@ -44,6 +55,42 @@
         const { player1, player2 } = getQueryParams();
         console.log(player1,player2)
         // ${player1}; ${player2};
+
+        if (player1) {
+            if (player1 === "venom") {
+                punch1 += 5
+            }
+            if (player1 === "ivanzolo2009") {
+               heal1 -= 5
+            }
+            if (player1 === "snoopdogg") {
+                maxhpenemy1 += 75
+                hpenemy1 = maxhpenemy1
+                punch1 -= 5
+            }
+            if (player1 === "rinat") {
+                maxhpenemy1 += 20
+                hpenemy1 = maxhpenemy1
+            }
+        }
+
+        if (player2) {
+            if (player2 === "venom") {
+                punch2 += 5
+            }
+            if (player2 === "ivanzolo2009") {
+               heal2 -= 5
+            }
+            if (player2 === "snoopdogg") {
+                maxhpenemy2 += 75
+                hpenemy2 = maxhpenemy2
+                punch2 -= 5
+            }
+            if (player2 === "rinat") {
+                maxhpenemy2 += 20
+                hpenemy2 = maxhpenemy2
+            }
+        }
         
         var audioElement = new Audio();
         audioElement.src = './content/music/battle.mp3';
@@ -63,14 +110,6 @@
         };
 
         document.addEventListener('mousemove', myListener, false);
-
-        let maxhpenemy1 = 100
-        let maxhpenemy2 = 100
-        let hpenemy1 = 100
-        let hpenemy2 = 100
-
-        let punch1 = 10
-        let punch2 = 10
 
         let debounce = false
         let debounce2 = false
@@ -169,6 +208,9 @@
                     if (player2 === "snoopdogg") {
                         image.src = "../content/images/SnoopDogg/sd.gif"
                     }
+                    if (player2 === "rinat") {
+                        image.src = "../content/images/Default/"+to
+                    }
                 }
                 else {
                     // image.src = "../content/images/sd.gif"
@@ -184,6 +226,9 @@
                     }
                     if (player1 === "snoopdogg") {
                         image.src = "../content/images/SnoopDogg/sd.gif"
+                    }
+                    if (player1 === "rinat") {
+                        image.src = "../content/images/Default/"+to+".png"
                     }
                 }
             }
@@ -278,7 +323,7 @@
                 if (!debounce) {
                     debounce = true
                     function back() {
-                        damagecontrol(imag,-5)
+                        damagecontrol(imag,heal1)
                         imagecontrol(imag,'ENEMY')
                         debounce = false
                     }
@@ -349,7 +394,7 @@
                     function back() {
                         imagecontrol(imag2,'ENEMY.png')
                         debounce2 = false
-                        damagecontrol(imag2,-5)
+                        damagecontrol(imag2,heal2)
                         
                     }
                     imagecontrol(imag2,'drink.png')
