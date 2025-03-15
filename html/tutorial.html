@@ -18,7 +18,7 @@
 </head>
 <body>
     <div class="navbar">
-        <div class="INFO">© 2024 ZloyKirill, Inc. All Rights Reserved.</div>
+        <div class="INFO">© 2024-2025 ZloyKirill, Inc. All Rights Reserved.</div>
       </div>
     <div class="fent">ULTIMATE FIGHTING SIMULATOR</div>
     <div class="fent2">tutorial</div>
@@ -52,17 +52,38 @@
     </div>
     <div class="setting99">
         "
-        Player1:  Q:Attack; W:Heal; E:Block
+        Player1:  'Q':Attack; 'W':Heal; 'E':Block
         "
     </div>
     <div class="setting99">
         "
-        Player2:  P:Attack; [:Heal; ]:Block
+        Player2:  'P':Attack; '[':Heal; ']':Block
         "
     </div>
     <div class="wrapperb">
         <a href="../index.html">Back</a>
     </div>
+    <script>
+        // Function to modify all <a> tags so they preserve the query parameters
+        function preserveDataOnLinks() {
+        const currentUrl = new URL(window.location.href); // Get the current URL
+        const currentParams = currentUrl.searchParams; // Get current query parameters
+
+        // Add an event listener to all anchor tags
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function(event) {
+            const href = new URL(link.href); // Get the href of the clicked link
+            // Append all the current query parameters to the href of the clicked link
+            currentParams.forEach((value, key) => {
+                href.searchParams.set(key, value);
+            });
+            
+            // Update the link's href with the modified URL
+            link.href = href.toString();
+            });
+        });
+        }
+    </script>
     <script>
         var audioElement = new Audio();
         audioElement.src = 'content/music/track1.mp3';
