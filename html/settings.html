@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+ 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@1,300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Doto:ROND@65&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/csshake-slow.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://fav.farm/🥓" />   
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>U.F.S</title>
+</head>
+<body>
+    <div class="navbar">
+        <div class="INFO">© 2024-2025 ZloyKirill, Inc. All Rights Reserved.</div>
+      </div>
+    <div class="fent">ULTIMATE FIGHTING SIMULATOR</div>
+    <div class="fent2">tutorial</div>
+    <div class="setting99">
+        "
+        funny mode
+        "
+    </div>
+    <div class="centerAlign">
+        <label class="switch">
+            <input type="checkbox" id="slider1">
+            <span class="slider"></span>
+        </label>
+    </div>
+    <div class="wrapperb">
+        <a id="return1" onclick="ret()">Back</a>
+    </div>
+    <script>
+        var audioElement = new Audio();
+        audioElement.src = 'content/music/track1.mp3';
+        audioElement.volume = 0.25; // Для более мягкого звука
+        audioElement.preload = 'auto';
+        audioElement.play();
+        
+    </script>
+    <script>
+        // Select the checkboxes by their IDs
+        var slider1 = document.getElementById('slider1');
+        var slider2 = document.getElementById('slider2');
+    
+        // Event listener to detect change
+        slider1.addEventListener('change', function() {
+            if (slider1.checked) {
+                console.log('Slider 1 is ON');
+            } else {
+                console.log('Slider 1 is OFF');
+            }
+        });
+    
+        slider2.addEventListener('change', function() {
+            if (slider2.checked) {
+                console.log('Slider 2 is ON');
+            } else {
+                console.log('Slider 2 is OFF');
+            }
+        });
+        function ret() {
+            const url = `../index.html?funnymode=${encodeURIComponent(slider1.checked)}`;
+            window.location.href = url;
+        }
+    </script>
+    <script>
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                funnymode: params.get('funnymode') || 'false',
+            };
+         }  
+        const { funnymode } = getQueryParams()
+        if (funnymode == 'true') {
+            const toggleSwitch = document.getElementById('slider1');
+            toggleSwitch.checked = !toggleSwitch.checked
+        }
+    </script>
+</body>
+</html>
