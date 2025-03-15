@@ -13,6 +13,7 @@
             justify-content: center;
             height: 100vh;
             background-color: #1e1e2e;
+            background-image: url('../content/images/background.png');
             color: white;
             gap: 20px;
         }
@@ -135,8 +136,38 @@
                 return;
             }
             
-            const url = `start.html?player1=${encodeURIComponent(player1Ultimate)}&player2=${encodeURIComponent(player2Ultimate)}`;
+            function getQueryParams() {
+                const params = new URLSearchParams(window.location.search);
+                return {
+                    funnymode: params.get('funnymode') || 'false',
+                };
+            }  
+
+            const { funnymode } = getQueryParams();
+
+            const url = `start.html?player1=${encodeURIComponent(player1Ultimate)}&player2=${encodeURIComponent(player2Ultimate)}&funnymode=${encodeURIComponent(funnymode)}`;
             window.location.href = url;
+        }
+    </script>
+    <script>
+        // Function to modify all <a> tags so they preserve the query parameters
+        function preserveDataOnLinks() {
+        const currentUrl = new URL(window.location.href); // Get the current URL
+        const currentParams = currentUrl.searchParams; // Get current query parameters
+
+        // Add an event listener to all anchor tags
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function(event) {
+            const href = new URL(link.href); // Get the href of the clicked link
+            // Append all the current query parameters to the href of the clicked link
+            currentParams.forEach((value, key) => {
+                href.searchParams.set(key, value);
+            });
+            
+            // Update the link's href with the modified URL
+            link.href = href.toString();
+            });
+        });
         }
     </script>
 </body>
