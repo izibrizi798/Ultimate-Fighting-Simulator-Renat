@@ -24,12 +24,23 @@
     <div class="fent2">tutorial</div>
     <div class="setting99">
         "
-        funny mode
+        CHAOS mode
         "
     </div>
     <div class="centerAlign">
         <label class="switch">
             <input type="checkbox" id="slider1">
+            <span class="slider"></span>
+        </label>
+    </div>
+    <div class="setting99">
+        "
+        Lobotomy mode
+        "
+    </div>
+    <div class="centerAlign">
+        <label class="switch">
+            <input type="checkbox" id="slider2">
             <span class="slider"></span>
         </label>
     </div>
@@ -66,7 +77,7 @@
             }
         });
         function ret() {
-            const url = `../index.html?funnymode=${encodeURIComponent(slider1.checked)}`;
+            const url = `../index.html?funnymode=${encodeURIComponent(slider1.checked)}&lobotomymode=${encodeURIComponent(slider2.checked)}`;
             window.location.href = url;
         }
     </script>
