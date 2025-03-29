@@ -50,6 +50,11 @@
         rinat       : Health boost
         "
     </div>
+    <div class="setting98">    
+        "
+        kjrinat:       : heals when he damages
+        "
+    </div>
     <div class="setting99">
         "
         Player1:  'Q':Attack; 'W':Heal; 'E':Block
@@ -61,9 +66,37 @@
         "
     </div>
     <div class="wrapperb">
-        <a href="../index.html">Back</a>
+        <a onclick="ret()">Back</a>
     </div>
     <script>
+        var audioElement = new Audio();
+        audioElement.src = 'content/music/track1.mp3';
+        audioElement.volume = 0.25; // Для более мягкого звука
+        audioElement.preload = 'auto';
+        audioElement.play();
+    </script>
+    <script>
+
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                funnymode: params.get('funnymode') || 'false'
+            };
+        }
+
+        const { funnymode } = getQueryParams();
+
+        function ret() {
+            if (funnymode === 'true') {
+                const url = `../index.html?funnymode=${encodeURIComponent(funnymode)}`;
+                window.location.href = url;
+            }
+            else {
+                const url = `../index.html?funnymode=${encodeURIComponent(funnymode)}`;
+                window.location.href = url;
+            }
+        }
+
         // Function to modify all <a> tags so they preserve the query parameters
         function preserveDataOnLinks() {
         const currentUrl = new URL(window.location.href); // Get the current URL
@@ -83,13 +116,6 @@
             });
         });
         }
-    </script>
-    <script>
-        var audioElement = new Audio();
-        audioElement.src = 'content/music/track1.mp3';
-        audioElement.volume = 0.25; // Для более мягкого звука
-        audioElement.preload = 'auto';
-        audioElement.play();
     </script>
 </body>
 </html>
