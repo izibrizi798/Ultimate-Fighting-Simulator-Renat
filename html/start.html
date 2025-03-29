@@ -49,12 +49,13 @@
             return {
                 player1: params.get('player1') || 'Unknown',
                 player2: params.get('player2') || 'Unknown',
-                funnymode: params.get('funnymode') || 'false'
+                funnymode: params.get('funnymode') || 'false',
+                lobotomymode: params.get('lobotomymode') || 'false'
             };
         }
 
-        const { player1, player2, funnymode } = getQueryParams();
-        console.log(player1,player2)
+        const { player1, player2, funnymode, lobotomymode } = getQueryParams();
+        console.log(player1,player2,funnymode,lobotomymode)
         // ${player1}; ${player2};
 
         if (funnymode === 'true') {
@@ -62,6 +63,12 @@
             punch2 = punch2 + Math.floor(Math.random() * (30 - (-9) + 1)) + (-9);
             heal1 = heal1 + Math.floor(Math.random() * (30 - (-9) + 1)) + (-9);
             heal2 = heal2 + Math.floor(Math.random() * (30 - (-9) + 1)) + (-9);
+
+            maxhpenemy1 = maxhpenemy1 + Math.floor(Math.random() * (30 - (-9) + 1)) + (-9);
+            maxhpenemy2 = maxhpenemy2 + Math.floor(Math.random() * (30 - (-9) + 1)) + (-9);
+
+            hpenemy1 = hpenemy1 + Math.floor(Math.random() * (30 - (-9) + 1)) + (-9);
+            hpenemy2 = hpenemy2 + Math.floor(Math.random() * (30 - (-9) + 1)) + (-9);
         }
 
         if (player1) {
@@ -191,10 +198,22 @@
         function damagecontrol(enm,damage) {
             if (enm) {
                 if (enm === imag) {
+                    if (player1 === "kjrinat") {
+                        var d = Math.random();
+                        if (d > 0.7) {
+                            hpenemy1 = hpenemy1 + damage*2
+                        }
+                    }
                     hpenemy1 = hpenemy1 - damage
                     hpenemy1v.textContent = String(hpenemy1) + "/" + String(maxhpenemy1)
                 }
                 if (enm === imag2) {
+                    if (player2 === "kjrinat") {
+                        var d = Math.random();
+                        if (d > 0.7) {
+                            hpenemy2 = hpenemy2 + damage*2
+                        }
+                    }
                     hpenemy2 = hpenemy2 - damage
                     hpenemy2v.textContent = String(hpenemy2) + "/" + String(maxhpenemy2)
                 }
@@ -222,6 +241,29 @@
                     if (player2 === "rinat") {
                         image.src = "../content/images/Default/"+to
                     }
+                    if (player2 === "kjrinat") {
+                        image.src = "../content/images/KjRinat/K_"+to
+                    }
+                    if (lobotomymode === 'true') {
+                        const folders = {
+                            "Venom": ["V_anim1.png", "V_anim2.png", "V_ENEMY.png","V_blockenemy.png","V_DamagedEnemy.png","V_drink.png","V_LOSE.png","V_VICTORY.png"],
+                            "SnoopDogg": ["sd.gif"],
+                            "Plankton": ["P_anim1.png", "P_anim2.png", "P_ENEMY.png","P_blockenemy.png","P_DamagedEnemy.png","P_drink.png","P_LOSE.png","P_VICTORY.png"],
+                            "KjRinat": ["K_anim1.png", "K_anim2.png", "K_ENEMY.png","K_blockenemy.png","K_DamagedEnemy.png","K_drink.png","K_LOSE.png","K_VICTORY.png"],
+                            "Ivanzolo": ["I_anim1.png", "I_anim2.png", "I_ENEMY.png","I_blockenemy.png","I_DamagedEnemy.png","I_drink.png","I_LOSE.png","I_VICTORY.png"],
+                            "Default": ["anim1.png", "anim2.png", "ENEMY.png","blockenemy.png","DamagedEnemy.png","drink.png","LOSE.png","VICTORY.png"],
+                        };
+
+                        // Pick a random folder
+                        const folderNames = Object.keys(folders);
+                        const randomFolder = folderNames[Math.floor(Math.random() * folderNames.length)];
+                        
+                        // Get random image from the selected folder
+                        const images = folders[randomFolder];
+                        const randomImage = images[Math.floor(Math.random() * images.length)];
+                        // Set the image in the div
+                        image.src=`../content/images/${randomFolder}/${randomImage}`
+                    }
                 }
                 else {
                     // image.src = "../content/images/sd.gif"
@@ -242,6 +284,29 @@
                     }
                     if (player1 === "rinat") {
                         image.src = "../content/images/Default/"+to+".png"
+                    }
+                    if (player1 === "kjrinat") {
+                        image.src = "../content/images/KjRinat/K_"+to+".png"
+                    }
+                    if (lobotomymode === 'true') {
+                        const folders = {
+                            "Venom": ["V_anim1.png", "V_anim2.png", "V_ENEMY.png","V_blockenemy.png","V_DamagedEnemy.png","V_drink.png","V_LOSE.png","V_VICTORY.png"],
+                            "SnoopDogg": ["sd.gif"],
+                            "Plankton": ["P_anim1.png", "P_anim2.png", "P_ENEMY.png","P_blockenemy.png","P_DamagedEnemy.png","P_drink.png","P_LOSE.png","P_VICTORY.png"],
+                            "KjRinat": ["K_anim1.png", "K_anim2.png", "K_ENEMY.png","K_blockenemy.png","K_DamagedEnemy.png","K_drink.png","K_LOSE.png","K_VICTORY.png"],
+                            "Ivanzolo": ["I_anim1.png", "I_anim2.png", "I_ENEMY.png","I_blockenemy.png","I_DamagedEnemy.png","I_drink.png","I_LOSE.png","I_VICTORY.png"],
+                            "Default": ["anim1.png", "anim2.png", "ENEMY.png","blockenemy.png","DamagedEnemy.png","drink.png","LOSE.png","VICTORY.png"],
+                        };
+
+                        // Pick a random folder
+                        const folderNames = Object.keys(folders);
+                        const randomFolder = folderNames[Math.floor(Math.random() * folderNames.length)];
+                        
+                        // Get random image from the selected folder
+                        const images = folders[randomFolder];
+                        const randomImage = images[Math.floor(Math.random() * images.length)];
+                        // Set the image in the div
+                        image.src=`../content/images/${randomFolder}/${randomImage}`
                     }
                 }
             }
