@@ -14,50 +14,88 @@
             height: 100vh;
             background-color: #1e1e2e;
             background-image: url('../content/images/background.png');
+            background-size: cover;
+            background-position: center;
             color: white;
-            gap: 20px;
+            gap: 40px;
         }
         .selection-container {
             display: flex;
-            gap: 50px;
+            gap: 100px;
         }
         .container {
+            position: relative;
             padding: 20px;
-            background: #282a36;
+            background: rgba(40, 42, 54, 0.9);
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             text-align: center;
         }
-        select, button {
-            margin-top: 10px;
-            padding: 10px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
+        .ultimates-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 80px);
+            gap: 15px;
+            margin-top: 20px;
         }
-        button {
-            background-color: #ff6b6b;
-            color: white;
+        .ultimate-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            border: 3px solid transparent;
             cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
         }
-        button:hover {
-            background-color: #ff8787;
+        .ultimate-icon:hover {
+            transform: scale(1.05);
+            border-color: #ff6b6b;
+        }
+        .ultimate-icon.selected {
+            border-color: #4caf50;
         }
         .ultimate-display {
-            margin-top: 20px;
-            font-size: 20px;
+            margin-top: 15px;
+            font-size: 18px;
+        }
+        .ultimate-description-box {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 200px;
+            font-size: 16px;
+            color: #ccc;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 10px;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: left;
+        }
+        .ultimate-description-box.active {
+            opacity: 1;
+        }
+        #description-box-1 {
+            left: -240px;
+        }
+        #description-box-2 {
+            right: -240px;
         }
         .start-button {
-            margin-top: 20px;
             padding: 15px 30px;
-            font-size: 18px;
+            font-size: 20px;
             background-color: #4caf50;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
         }
-        .start-button:hover {
+        .start-button:disabled {
+            background-color: #888;
+            cursor: not-allowed;
+        }
+        .start-button:hover:enabled {
             background-color: #66bb6a;
         }
     </style>
@@ -66,68 +104,85 @@
     <div class="selection-container">
         <div class="container" id="player1-container">
             <h2>Player 1: Select Your Ultimate</h2>
-            <select id="ultimate-select-1">
-                <option value="">-- Select an Ultimate --</option>
-                <option value="plankton">plankton</option>
-                <option value="venom">venom</option>
-                <option value="snoopdogg">snoopdogg</option>
-                <option value="ivanzolo2009">ivanzolo2009</option>
-                <option value="rinat">rinat</option>
-            </select>
-            <button onclick="selectUltimate(1)">Confirm</button>
+            <div class="ultimates-grid" id="ultimates-1"></div>
             <div class="ultimate-display" id="ultimate-display-1"></div>
+            <div class="ultimate-description-box" id="description-box-1"></div>
         </div>
 
         <div class="container" id="player2-container">
             <h2>Player 2: Select Your Ultimate</h2>
-            <select id="ultimate-select-2">
-                <option value="">-- Select an Ultimate --</option>
-                <option value="plankton">plankton</option>
-                <option value="venom">venom</option>
-                <option value="snoopdogg">snoopdogg</option>
-                <option value="ivanzolo2009">ivanzolo2009</option>
-                <option value="rinat">rinat</option>
-            </select>
-            <button onclick="selectUltimate(2)">Confirm</button>
+            <div class="ultimates-grid" id="ultimates-2"></div>
             <div class="ultimate-display" id="ultimate-display-2"></div>
+            <div class="ultimate-description-box" id="description-box-2"></div>
         </div>
     </div>
 
     <button class="start-button" onclick="startGame()" disabled id="start-btn">Start Game</button>
 
     <script>
+        const ultimates = ["plankton", "venom", "snoopdogg", "ivanzolo2009", "rinat", "kjrinat"];
+
+        const descriptions = {
+            plankton: "A cunning microscopic villain with tech powers. (plankton: Block boost) Block sometime deals 5 damage",
+            venom: "An alien symbiote with savage strength and agility. (venom: Damage boost) Damage is increased by 50%, making it 15 damage",
+            snoopdogg: "Laid-back, smooth, and deadly with style. (snoopdogg: Health boost and Damage debuff) Damage is decreased by 50% and increased health by 75%, making it 5 damage and 175 health",
+            ivanzolo2009: "Mysterious presence from the shadows. (ivanzolo2009: Heal boost) heal increased by 100%, making it 10 heal",
+            rinat: "Master of strategy and chaos. (rinat: Health boost) health increased by 20%, making it 120 health",
+            kjrinat: "An enhanced version with unpredictable powers. (kjrinat: heals when he damages) has 35% chance to heal health equal to damage when he received damage"
+        };
+
         let player1Selected = false;
         let player2Selected = false;
         let player1Ultimate = "";
         let player2Ultimate = "";
 
-        function selectUltimate(player) {
-            const selectElement = document.getElementById(`ultimate-select-${player}`);
-            const displayElement = document.getElementById(`ultimate-display-${player}`);
-            const selectedUltimate = selectElement.value;
-            
-            if (selectedUltimate) {
-                displayElement.textContent = `Player ${player} selected: ${selectedUltimate}`;
-                if (player === 1) {
-                    player1Selected = true;
-                    player1Ultimate = selectedUltimate;
-                }
-                if (player === 2) {
-                    player2Selected = true;
-                    player2Ultimate = selectedUltimate;
-                }
+        function createUltimateIcons(containerId, player) {
+            const container = document.getElementById(containerId);
+            ultimates.forEach(ultimate => {
+                const img = document.createElement("img");
+                img.src = `../content/icons/${ultimate}.gif`;
+                img.alt = ultimate;
+                img.className = "ultimate-icon";
+                img.onclick = () => selectUltimate(player, ultimate, img);
+                container.appendChild(img);
+            });
+        }
+
+        function selectUltimate(player, ultimate, element) {
+            const display = document.getElementById(`ultimate-display-${player}`);
+            const descBox = document.getElementById(`description-box-${player}`);
+            const grid = document.getElementById(`ultimates-${player}`);
+
+            Array.from(grid.children).forEach(child => child.classList.remove("selected"));
+            element.classList.add("selected");
+
+            if (player === 1) {
+                player1Selected = true;
+                player1Ultimate = ultimate;
+            } else {
+                player2Selected = true;
+                player2Ultimate = ultimate;
             }
-            
+
+            display.textContent = `Selected: ${ultimate}`;
+
+            const rawDesc = descriptions[ultimate] || "";
+            const parts = rawDesc.split(/\s*\(([^)]+)\)/); // Split the description and stats
+            const mainDesc = parts[0]?.trim() || "";
+            const stats = parts.slice(1).map(stat => stat.trim()); // Get all stats
+
+            descBox.innerHTML = `
+                <div>${mainDesc}</div>
+                ${stats.length > 0 ? `<div style="margin-top: 10px; color: #9eff9e; font-weight: bold;">(${stats[0]})</div>` : ''}
+                ${stats.length > 1 ? `<div style="margin-top: 10px; color: red; font-weight: bold;">(${stats[1]})</div>` : ''}
+            `;
+            descBox.classList.add("active");
             checkStartCondition();
         }
 
         function checkStartCondition() {
             const startButton = document.getElementById("start-btn");
-            if (player1Selected && player2Selected) {
-                startButton.disabled = false;
-            } else {
-                startButton.disabled = true;
-            }
+            startButton.disabled = !(player1Selected && player2Selected);
         }
 
         function startGame() {
@@ -135,40 +190,24 @@
                 alert("Both players must select an ultimate before starting!");
                 return;
             }
-            
-            function getQueryParams() {
-                const params = new URLSearchParams(window.location.search);
-                return {
-                    funnymode: params.get('funnymode') || 'false',
-                };
-            }  
 
-            const { funnymode } = getQueryParams();
+            const params = new URLSearchParams(window.location.search);
+            const funnymode = params.get('funnymode') || 'false';
+            const lobotomymode = params.get('lobotomymode') || 'false';
 
-            const url = `start.html?player1=${encodeURIComponent(player1Ultimate)}&player2=${encodeURIComponent(player2Ultimate)}&funnymode=${encodeURIComponent(funnymode)}`;
+            const url = `start.html?player1=${encodeURIComponent(player1Ultimate)}&player2=${encodeURIComponent(player2Ultimate)}&funnymode=${encodeURIComponent(funnymode)}&lobotomymode=${encodeURIComponent(lobotomymode)}`;
             window.location.href = url;
         }
+
+        createUltimateIcons("ultimates-1", 1);
+        createUltimateIcons("ultimates-2", 2);
     </script>
     <script>
-        // Function to modify all <a> tags so they preserve the query parameters
-        function preserveDataOnLinks() {
-        const currentUrl = new URL(window.location.href); // Get the current URL
-        const currentParams = currentUrl.searchParams; // Get current query parameters
-
-        // Add an event listener to all anchor tags
-        document.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', function(event) {
-            const href = new URL(link.href); // Get the href of the clicked link
-            // Append all the current query parameters to the href of the clicked link
-            currentParams.forEach((value, key) => {
-                href.searchParams.set(key, value);
-            });
-            
-            // Update the link's href with the modified URL
-            link.href = href.toString();
-            });
-        });
-        }
+        var audioElement = new Audio();
+        audioElement.src = 'content/music/track1.mp3';
+        audioElement.volume = 0.25; // Для более мягкого звука
+        audioElement.preload = 'auto';
+        audioElement.play();
     </script>
 </body>
 </html>
