@@ -80,21 +80,23 @@
         function getQueryParams() {
             const params = new URLSearchParams(window.location.search);
             return {
-                funnymode: params.get('funnymode') || 'false'
+                funnymode: params.get('funnymode') || 'false',
+                lobotomymode: params.get('lobotomymode') || 'false',
+                amogusmode: params.get('amogusmode') || 'false',
             };
         }
 
-        const { funnymode } = getQueryParams();
+        const { funnymode,lobotomymode,amogusmode } = getQueryParams();
 
         function ret() {
-            if (funnymode === 'true') {
-                const url = `../index.html?funnymode=${encodeURIComponent(funnymode)}`;
+            // if (funnymode === 'true') {
+                const url = `../index.html?funnymode=${encodeURIComponent(funnymode)}&lobotomymode=${encodeURIComponent(lobotomymode)}&amogusmode=${encodeURIComponent(amogusmode)}`;
                 window.location.href = url;
-            }
-            else {
-                const url = `../index.html?funnymode=${encodeURIComponent(funnymode)}`;
-                window.location.href = url;
-            }
+            // }
+            // else {
+            //     const url = `../index.html?funnymode=${encodeURIComponent(funnymode)}`;
+            //     window.location.href = url;
+            // }
         }
 
         // Function to modify all <a> tags so they preserve the query parameters
