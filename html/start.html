@@ -50,12 +50,13 @@
                 player1: params.get('player1') || 'Unknown',
                 player2: params.get('player2') || 'Unknown',
                 funnymode: params.get('funnymode') || 'false',
-                lobotomymode: params.get('lobotomymode') || 'false'
+                lobotomymode: params.get('lobotomymode') || 'false',
+                amogusmode: params.get('amogusmode') || 'false'
             };
         }
 
-        const { player1, player2, funnymode, lobotomymode } = getQueryParams();
-        console.log(player1,player2,funnymode,lobotomymode)
+        const { player1, player2, funnymode, lobotomymode, amogusmode} = getQueryParams();
+        console.log(player1,player2,funnymode,lobotomymode,amogusmode)
         // ${player1}; ${player2};
 
         if (funnymode === 'true') {
@@ -244,6 +245,29 @@
                     if (player2 === "kjrinat") {
                         image.src = "../content/images/KjRinat/K_"+to
                     }
+                    if (amogusmode === 'true') {
+                        var d = Math.random();
+                        var sdf=true
+                        if (d > 0.2) {
+                            image.src = "../content/images/Amogus/sd.gif"
+                            sdf = false
+                        }
+                        if (d > 0.4) {
+                            image.src = "../content/images/Amogus/sd2.gif"
+                            sdf = false
+                        }
+                        if (d > 0.6) {
+                            image.src = "../content/images/Amogus/sd3.gif"
+                            sdf = false
+                        }
+                        if (d > 0.8) {
+                            image.src = "../content/images/Amogus/sd4.gif"
+                            sdf = false
+                        }
+                        if (sdf === true) {
+                            image.src = "../content/images/Amogus/sd5.gif"
+                        }
+                    }
                     if (lobotomymode === 'true') {
                         const folders = {
                             "Venom": ["V_anim1.png", "V_anim2.png", "V_ENEMY.png","V_blockenemy.png","V_DamagedEnemy.png","V_drink.png","V_LOSE.png","V_VICTORY.png"],
@@ -307,6 +331,29 @@
                         const randomImage = images[Math.floor(Math.random() * images.length)];
                         // Set the image in the div
                         image.src=`../content/images/${randomFolder}/${randomImage}`
+                    }
+                    if (amogusmode === 'true') {
+                        var d = Math.random();
+                        var sdf=true
+                        if (d > 0.2) {
+                            image.src = "../content/images/Amogus/sd.gif"
+                            sdf = false
+                        }
+                        if (d > 0.4) {
+                            image.src = "../content/images/Amogus/sd2.gif"
+                            sdf = false
+                        }
+                        if (d > 0.6) {
+                            image.src = "../content/images/Amogus/sd3.gif"
+                            sdf = false
+                        }
+                        if (d > 0.8) {
+                            image.src = "../content/images/Amogus/sd4.gif"
+                            sdf = false
+                        }
+                        if (sdf === true) {
+                            image.src = "../content/images/Amogus/sd5.gif"
+                        }
                     }
                 }
             }
