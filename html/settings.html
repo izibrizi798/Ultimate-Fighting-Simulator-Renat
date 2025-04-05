@@ -44,6 +44,17 @@
             <span class="slider"></span>
         </label>
     </div>
+    <div class="setting99" style="margin-left: 50%;">
+        "
+        Amogus mode
+        "
+    </div>
+    <div class="centerAlign" style="margin-left: 50%;">
+        <label class="switch">
+            <input type="checkbox" id="slider3">
+            <span class="slider"></span>
+        </label>
+    </div>
     <div class="wrapperb">
         <a id="return1" onclick="ret()">Back</a>
     </div>
@@ -59,6 +70,7 @@
         // Select the checkboxes by their IDs
         var slider1 = document.getElementById('slider1');
         var slider2 = document.getElementById('slider2');
+        var slider3 = document.getElementById('slider3');
     
         // Event listener to detect change
         slider1.addEventListener('change', function() {
@@ -76,8 +88,17 @@
                 console.log('Slider 2 is OFF');
             }
         });
+
+        slider3.addEventListener('change', function() {
+            if (slider3.checked) {
+                console.log('Slider 3 is ON');
+            } else {
+                console.log('Slider 3 is OFF');
+            }
+        });
+
         function ret() {
-            const url = `../index.html?funnymode=${encodeURIComponent(slider1.checked)}&lobotomymode=${encodeURIComponent(slider2.checked)}`;
+            const url = `../index.html?funnymode=${encodeURIComponent(slider1.checked)}&amogusmode=${encodeURIComponent(slider3.checked)}`;
             window.location.href = url;
         }
     </script>
@@ -86,11 +107,16 @@
             const params = new URLSearchParams(window.location.search);
             return {
                 funnymode: params.get('funnymode') || 'false',
+                lobotomymode: params.get('lobotomymode') || 'false',
             };
          }  
-        const { funnymode } = getQueryParams()
+        const { funnymode, lobotomymode } = getQueryParams()
         if (funnymode == 'true') {
             const toggleSwitch = document.getElementById('slider1');
+            toggleSwitch.checked = !toggleSwitch.checked
+        }
+        if (lobotomymode == 'true') {
+            const toggleSwitch = document.getElementById('slider2');
             toggleSwitch.checked = !toggleSwitch.checked
         }
     </script>
