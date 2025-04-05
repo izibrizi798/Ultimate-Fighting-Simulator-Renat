@@ -128,7 +128,7 @@
             snoopdogg: "Laid-back, smooth, and deadly with style. (snoopdogg: Health boost and Damage debuff) Damage is decreased by 50% and increased health by 75%, making it 5 damage and 175 health",
             ivanzolo2009: "Mysterious presence from the shadows. (ivanzolo2009: Heal boost) heal increased by 100%, making it 10 heal",
             rinat: "Master of strategy and chaos. (rinat: Health boost) health increased by 20%, making it 120 health",
-            kjrinat: "An enhanced version with unpredictable powers. (kjrinat: heals when he damages) has 35% chance to heal health equal to damage when he received damage"
+            kjrinat: "An enhanced version with unpredictable powers. (kjrinat: heals when he damages) has 35% chance to heal health equal to damage when he received damage, sometimes damaging while healing"
         };
 
         let player1Selected = false;
@@ -194,8 +194,9 @@
             const params = new URLSearchParams(window.location.search);
             const funnymode = params.get('funnymode') || 'false';
             const lobotomymode = params.get('lobotomymode') || 'false';
+            const amogusmode = params.get('amogusmode') || 'false';
 
-            const url = `start.html?player1=${encodeURIComponent(player1Ultimate)}&player2=${encodeURIComponent(player2Ultimate)}&funnymode=${encodeURIComponent(funnymode)}&lobotomymode=${encodeURIComponent(lobotomymode)}`;
+            const url = `start.html?player1=${encodeURIComponent(player1Ultimate)}&player2=${encodeURIComponent(player2Ultimate)}&funnymode=${encodeURIComponent(funnymode)}&lobotomymode=${encodeURIComponent(lobotomymode)}&amogusmode=${encodeURIComponent(amogusmode)}`;
             window.location.href = url;
         }
 
