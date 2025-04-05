@@ -170,6 +170,14 @@ html {
   position: fixed;
   padding-left: 70%;
 }
+.fent0 {
+  font-size: 150px;
+  font-weight: 400;
+  text-align: center;
+  color: rgb(255, 127, 234);
+  animation: shake 3s;
+  animation-iteration-count: infinite;
+}
 .fent {
     font-size: 50px;
     font-weight: 400;
@@ -210,6 +218,12 @@ html {
     left: 50%;
     transform: translate(-50%, 70%);
   }
+  .wrapper4{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 170%);
+  }
   .navbar {
     overflow: hidden;
     background-color: #d8d8d8;
@@ -228,7 +242,7 @@ html {
 
   .setting98 {
     padding-top: 0%;
-    font-size: 10px;
+    font-size: 8px;
     font-weight: 400;
     text-align: center;
     color: rgb(255, 127, 234);
